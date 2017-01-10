@@ -10,7 +10,7 @@ const article = (state = initialState, action) => {
     case actions.SHOW_ARTICLE: {
       return {
         ...state,
-        article: action.payload.article
+        ...action.payload.article
       }
     }
     default: {
