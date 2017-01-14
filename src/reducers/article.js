@@ -1,8 +1,8 @@
 import actions from '../constans';
 
 const initialState = {
-  title: "Hey I'm an article",
-  text: "Yo are you there"
+  title: "",
+  text: ""
 }
 
 const article = (state = initialState, action) => {

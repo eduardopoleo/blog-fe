@@ -14,7 +14,6 @@ class Articles extends Component {
 
     return(
       <div>
-        <div>Rendered!</div>
         {
           articles.map(
             article => <Article key={article.id} id={article.id} article={article.attributes} />
