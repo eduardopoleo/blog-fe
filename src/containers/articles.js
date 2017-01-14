@@ -9,8 +9,9 @@ class Articles extends Component {
   }
 
   render() {
-    const { articles } = this.props;
+    const { articles } = this.props.dataReducer;
     if (!articles || !articles.length) return null;
+
     return(
       <div>
         <div>Rendered!</div>

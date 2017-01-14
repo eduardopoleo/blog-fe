@@ -1,8 +1,6 @@
 import actions from '../constans';
 
-const initialState = {
-  articles: []
-}
+const initialState = []
 
 const articles = (state = initialState, action) => {
   switch (action.type) {

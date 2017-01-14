@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import Articles from './articles';
 import Article from './article-page';
 import Navbar from '../components/navbar';
-import dataReducer from '../reducers/articles';
+import dataReducer from '../reducers';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import thunk from 'redux-thunk';
