@@ -17,7 +17,7 @@ class Articles extends Component {
         <div>Rendered!</div>
         {
           articles.map(
-            article => <Article key={article.id} article={article.attributes} />
+            article => <Article key={article.id} id={article.id} article={article.attributes} />
           )
         }
       </div>

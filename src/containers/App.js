@@ -27,6 +27,7 @@ export default class App extends Component {
           <Router history={history}>
             <Route path='/' component={Navbar}/>
             <Route path='/articles' component={Articles} />
+            <Route path='/articles/:id' component={Article} />
           </Router>
         </Provider>
       </div>

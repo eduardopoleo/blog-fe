@@ -1,19 +1,17 @@
 import axios from 'axios';
 import actions from '../constans';
 
-export const fetchArticle = () => {
-  // when trying to dispatch a function (which is what connect will do)
-  // instead it will call the function and pass dispatch to the returning function
-  // that is why we need this return
-  return dispatch => {
-    // now we return a promise because that's what axios does when doing async
-    // calls. Axios probably does this because is the easiest way to handle async
-    // stuff.
-    // thunk does not care it will unwrap and return the value of the dispatched object.
+export const fetchArticle = (id) => {
+  return (dispatch, getState) => {
+    const articles = getState().dataReducer.articles;
+    let article = articles.find(article => article.id === id);
 
-    // we could potentially dispatch then dispatch ...etc but if we get into
-    // complicated flows like this then we might considered sagas.
-    return axios.get('http://localhost:4444/articles/4.json')
+    if (article) {
+      dispatch(displayArticle(article.attributes));
+      return null;
+    }
+
+    return axios.get(`http://localhost:4444/articles/${id}.json`)
     .then((response) => {
       dispatch(
         displayArticle(response.data.data.attributes)
@@ -22,9 +20,9 @@ export const fetchArticle = () => {
   }
 }
 
-const displayArticle = (article) => {
+export const displayArticle = (article) => {
   return {
-    type: constants.SHOW_ARTICLE,
+    type: actions.SHOW_ARTICLE,
     payload: {
       article
     }
