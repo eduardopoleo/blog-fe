@@ -5,7 +5,7 @@ export const fetchArticle = () => {
   // when trying to dispatch a function (which is what connect will do)
   // instead it will call the function and pass dispatch to the returning function
   // that is why we need this return
-  return (dispatch) => {
+  return dispatch => {
     // now we return a promise because that's what axios does when doing async
     // calls. Axios probably does this because is the easiest way to handle async
     // stuff.
@@ -32,7 +32,7 @@ const displayArticle = (article) => {
 }
 
 export const fetchArticles = () => {
-  return (dispatch) => {
+  return dispatch => {
     return axios.get('http://localhost:4444/articles.json')
     .then((response) => {
       dispatch(

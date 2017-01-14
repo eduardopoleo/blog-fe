@@ -9,21 +9,17 @@ class Articles extends Component {
   }
 
   render() {
-    if (!this.props.articles.length) return null
+    const { articles } = this.props;
+    if (!articles.length) return null;
+
     return(
       <div>
-        {this._articles()}
+        {
+          articles.map(
+            article => <Article key={article.id} article={article.attributes} />
+          )
+        }
       </div>
-    )
-  }
-
-  _articles() {
-    return (
-      this.props.articles.map((article) => {
-        return (
-          <Article key={article.id} article={article.attributes} />
-        )
-      })
     )
   }
 }

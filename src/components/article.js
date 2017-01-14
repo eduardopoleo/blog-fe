@@ -4,11 +4,13 @@ import { fetchArticle } from '../actions'
 
 class Article extends Component {
   render() {
+    const { title, text } = this.props.article;
+    
     return(
       <div>
         <h1>Article Header</h1>
-        <div>{this.props.article.title}</div>
-        <div>{this.props.article.text}</div>
+        <div>{title}</div>
+        <div>{text}</div>
       </div>
     )
   }
