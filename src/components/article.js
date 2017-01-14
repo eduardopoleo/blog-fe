@@ -6,12 +6,12 @@ class Article extends Component {
   render() {
     return(
       <div>
+        <h1>Article Header</h1>
         <div>{this.props.article.title}</div>
         <div>{this.props.article.text}</div>
-        <button onClick={this.props.fetchArticle}>Click me</button>
       </div>
     )
   }
 }
 
-export default connect(state => state, { fetchArticle })(Article);
+export default Article;
