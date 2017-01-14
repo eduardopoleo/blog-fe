@@ -10,10 +10,10 @@ class Articles extends Component {
 
   render() {
     const { articles } = this.props;
-    if (!articles.length) return null;
-
+    if (!articles || !articles.length) return null;
     return(
       <div>
+        <div>Rendered!</div>
         {
           articles.map(
             article => <Article key={article.id} article={article.attributes} />
