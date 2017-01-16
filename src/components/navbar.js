@@ -11,10 +11,20 @@ class Navbar extends Component {
           <Link to="/">Home</Link>
           {' '}
           <Link to="/articles">Articles</Link>
+          {' '}
+          <Link to="/new-article">Create</Link>
         </header>
+        <div style={{ marginTop: '1.5em' }}>{this.props.children}</div>
       </div>
     )
   }
 }
+// this.props.children are children components in the nested form
+// <Parent>
+//   <Child1>
+//   <Child2>
+// </Parent>
+// This is considered passed as props.
 
+// we need to add the /articles otherwise It'll we'll start getting weird url
 export default Navbar;

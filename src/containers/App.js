@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import Articles from './articles';
-import Article from './article-page';
-import Navbar from '../components/navbar';
-import dataReducer from '../reducers';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import thunk from 'redux-thunk';
+
+import dataReducer from '../reducers';
+
+import Navbar from '../components/navbar';
+import Articles from './articles';
+import Article from './article';
+import NewArticle from '../components/new-article';
+import Home from '../components/home';
 
 const reducer = combineReducers({
   dataReducer,
@@ -20,14 +24,18 @@ const store = createStoreWithMiddleware(reducer);
 const history = syncHistoryWithStore(browserHistory, store)
 
 export default class App extends Component {
+  // Nested routes have to follow the nested structure of the app
   render() {
     return(
       <div>
         <Provider store={store}>
           <Router history={history}>
-            <Route path='/' component={Navbar}/>
-            <Route path='/articles' component={Articles} />
-            <Route path='/articles/:id' component={Article} />
+            <Route path='/' component={Navbar}>
+              <IndexRoute component={Home} />
+              <Route path='/articles' component={Articles} />
+              <Route path='/articles/:id' component={Article} />
+              <Route path='/new-article' component={NewArticle} />
+            </Route>
           </Router>
         </Provider>
       </div>
