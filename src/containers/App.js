@@ -4,18 +4,22 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import thunk from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form'
 
 import dataReducer from '../reducers';
 
 import Navbar from '../components/navbar';
 import Articles from './articles';
 import Article from './article';
-import NewArticle from '../components/new-article';
+import CreateArticle from './article-create-form';
 import Home from '../components/home';
+import { postArticle } from '../actions';
+
 
 const reducer = combineReducers({
   dataReducer,
-  routing: routerReducer
+  routing: routerReducer,
+  form: formReducer
 })
 // Connect by default assumes that mapActionsToProps is a regular action creator
 // We need thunk to unwrap this and allow functions.
@@ -34,7 +38,7 @@ export default class App extends Component {
               <IndexRoute component={Home} />
               <Route path='/articles' component={Articles} />
               <Route path='/articles/:id' component={Article} />
-              <Route path='/new-article' component={NewArticle} />
+              <Route path='/new-article' component={() => <CreateArticle/>} />
             </Route>
           </Router>
         </Provider>

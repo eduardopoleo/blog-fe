@@ -7,6 +7,12 @@ const articles = (state = initialState, action) => {
     case actions.SHOW_ARTICLES: {
       return action.payload.articles
     }
+    case actions.ADD_ARTICLE: {
+      return [
+        action.payload.article,
+        ...state.articles
+      ]
+    }
     default: {
       return state
     }

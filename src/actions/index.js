@@ -48,3 +48,29 @@ const displayArticles = (articles) => {
     }
   }
 }
+
+export const postArticle = (values) => {
+  return (dispatch) => {
+    return axios.post('http://localhost:4444/articles', {
+      title: values.title,
+      text: values.text
+    })
+    .then((response) => {
+      dispatch(
+        addArticle(response.data.data)
+      )
+    }, (error) => {
+      dispatch(addArticle(error))
+      console.log(error)
+    })
+  }
+}
+
+const addArticle = (article) => {
+  return {
+    type: actions.ADD_ARTICLE,
+    payload: {
+      article
+    }
+  }
+}
