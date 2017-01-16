@@ -13,8 +13,7 @@ import Articles from './articles';
 import Article from './article';
 import CreateArticle from './article-create-form';
 import Home from '../components/home';
-import { postArticle } from '../actions';
-
+import { getFormToken } from '../actions';
 
 const reducer = combineReducers({
   dataReducer,
@@ -29,6 +28,10 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 export default class App extends Component {
   // Nested routes have to follow the nested structure of the app
+  componentWillMount() {
+    getFormToken(store.dispatch)
+  }
+
   render() {
     return(
       <div>
@@ -38,7 +41,7 @@ export default class App extends Component {
               <IndexRoute component={Home} />
               <Route path='/articles' component={Articles} />
               <Route path='/articles/:id' component={Article} />
-              <Route path='/new-article' component={() => <CreateArticle/>} />
+              <Route path='/new-article' component={() => <CreateArticle token={store.getState().dataReducer.token} />}/> />
             </Route>
           </Router>
         </Provider>

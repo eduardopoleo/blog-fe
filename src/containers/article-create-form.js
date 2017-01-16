@@ -4,9 +4,12 @@ import { postArticle } from '../actions';
 
 class ArticleForm extends Component {
   render() {
+    const { dispatch, token } = this.props;
+    if (!token) return null;
+
     return (
       <form onSubmit={this.props.handleSubmit(
-          (values) => postArticle(values)(this.props.dispatch)
+          (values) => {postArticle(values)(dispatch, token)}
       )}>
         <div>
           <label htmlFor="title">Title</label>
@@ -21,7 +24,6 @@ class ArticleForm extends Component {
     );
   }
 }
-
 // Decorate the form component
 ArticleForm = reduxForm({
   form: 'PostNewArticle' // a unique name for this form

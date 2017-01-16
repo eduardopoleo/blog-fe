@@ -50,17 +50,25 @@ const displayArticles = (articles) => {
 }
 
 export const postArticle = (values) => {
-  return (dispatch) => {
-    return axios.post('http://localhost:4444/articles', {
-      title: values.title,
-      text: values.text
+  return (dispatch, token) => {
+    return axios({
+      method: 'post',
+      url: 'http://localhost:4444/articles',
+      data: {
+        article: {
+          title: values.title,
+          text: values.text
+        }
+      },
+      headers: {
+        'X-CSRF-Token': token
+      }
     })
     .then((response) => {
       dispatch(
         addArticle(response.data.data)
       )
     }, (error) => {
-      dispatch(addArticle(error))
       console.log(error)
     })
   }
@@ -71,6 +79,22 @@ const addArticle = (article) => {
     type: actions.ADD_ARTICLE,
     payload: {
       article
+    }
+  }
+}
+
+export const getFormToken = (dispatch) => {
+  axios.get('http://localhost:4444/get_token')
+  .then((response) => {
+    dispatch(setFormToken(response.data.token))
+  })
+}
+
+const setFormToken = (token) => {
+  return {
+    type: actions.SET_FORM_TOKEN,
+    payload: {
+      token
     }
   }
 }
