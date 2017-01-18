@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { postArticle } from '../actions';
+import { createArticle } from '../actions';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 class ArticleForm extends Component {
   render() {
@@ -8,9 +10,7 @@ class ArticleForm extends Component {
     if (!token) return null;
 
     return (
-      <form onSubmit={this.props.handleSubmit(
-          (values) => {postArticle(values)(dispatch, token)}
-      )}>
+      <form onSubmit={this.props.handleSubmit(this.props.createArticle)}>
         <div>
           <label htmlFor="title">Title</label>
           <Field name="title" component="input" type="text"/>
@@ -24,9 +24,13 @@ class ArticleForm extends Component {
     );
   }
 }
+
 // Decorate the form component
-ArticleForm = reduxForm({
-  form: 'PostNewArticle' // a unique name for this form
-})(ArticleForm);
+const formData = {
+  form: 'PostNewArticle'
+}
+
+ArticleForm = reduxForm(formData)(ArticleForm)
+ArticleForm = connect(null, { createArticle })(ArticleForm)
 
 export default ArticleForm;

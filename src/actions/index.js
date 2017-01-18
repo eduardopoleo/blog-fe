@@ -49,8 +49,8 @@ const displayArticles = (articles) => {
   }
 }
 
-export const postArticle = (values) => {
-  return (dispatch, token) => {
+export const createArticle = (values) => {
+  return (dispatch, getState) => {
     return axios({
       method: 'post',
       url: 'http://localhost:4444/articles',
@@ -59,9 +59,6 @@ export const postArticle = (values) => {
           title: values.title,
           text: values.text
         }
-      },
-      headers: {
-        'X-CSRF-Token': token
       }
     })
     .then((response) => {
