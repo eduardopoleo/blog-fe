@@ -6,9 +6,6 @@ import { compose } from 'redux';
 
 class ArticleForm extends Component {
   render() {
-    const { dispatch, token } = this.props;
-    if (!token) return null;
-
     return (
       <form onSubmit={this.props.handleSubmit(this.props.createArticle)}>
         <div>

@@ -59,6 +59,10 @@ export const createArticle = (values) => {
           title: values.title,
           text: values.text
         }
+      },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
     })
     .then((response) => {
@@ -76,22 +80,6 @@ const addArticle = (article) => {
     type: actions.ADD_ARTICLE,
     payload: {
       article
-    }
-  }
-}
-
-export const getFormToken = (dispatch) => {
-  axios.get('http://localhost:4444/get_token')
-  .then((response) => {
-    dispatch(setFormToken(response.data.token))
-  })
-}
-
-const setFormToken = (token) => {
-  return {
-    type: actions.SET_FORM_TOKEN,
-    payload: {
-      token
     }
   }
 }
