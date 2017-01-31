@@ -44,10 +44,14 @@ function validate(values) {
   const errors = {};
   if (!values.commenter || values.commenter.trim() === '') {
     errors.commenter = 'Your name is required';
+  } else if (values.commenter.length < 2) {
+    errors.commenter = "Your name must have at least 2 characters"
   }
 
   if (!values.body || values.body.trim() === '') {
     errors.body = 'Enter body';
+  } else if(values.body.length < 4) {
+    errors.body = 'Your comment must be at least 4 characters long'
   }
 
   return errors;
