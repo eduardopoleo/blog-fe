@@ -12,20 +12,8 @@ export const fetchArticle = (id) => {
       dispatch(displayArticle(article))
 
       return commentsUrl;
-    }).then(commentsUrl => {
-      axios.get(commentsUrl).then(response => {
-        dispatch(displayComments(response.data.data.map(parseComments)))
-      })
     })
   }
-}
-
-const parseResponse = (response, id) => {
-  const data = response.data.data;
-  const commentsUrl = data.relationships.comments.links.related;
-  const article = Object.assign(data.attributes, { id })
-
-  return [article, commentsUrl]
 }
 
 const parseComments = comment => comment.attributes

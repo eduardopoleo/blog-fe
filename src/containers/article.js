@@ -13,10 +13,10 @@ class ArticlePage extends Component {
   render() {
     const { article, comments } = this.props.dataReducer;
     if (!comments) return null;
-    
+
     return(
       <div>
-        <Link to='/articles'>Back to Articles</Link>
+        {this.categories()}
         <h1>{article.title}</h1>
         <p>{article.text}</p>
         <br />
@@ -25,6 +25,12 @@ class ArticlePage extends Component {
         <br />
         <ArticleComments comments={comments}/>
       </div>
+    )
+  }
+
+  categories() {
+    return (
+      this.props.categories.map(cat => <div>{cat.name}</div>)
     )
   }
 }

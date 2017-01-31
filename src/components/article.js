@@ -14,6 +14,8 @@ class Article extends Component {
       </div>
     )
   }
+
+
 }
 
 export default Article;
