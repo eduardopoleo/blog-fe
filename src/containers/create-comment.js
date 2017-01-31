@@ -8,12 +8,10 @@ class CommentForm extends Component {
     return (
       <form onSubmit={this.props.handleSubmit(this.props.createComment)}>
         <div>
-          <label htmlFor="title">Your Name</label>
-          <Field name="commenter" component="input" type="text"/>
+          <Field name="commenter" label="Commenter" component={renderInput} type="text"/>
         </div>
         <div>
-          <label htmlFor="text">Comment</label>
-          <Field name="body" component="textarea" type="text" />
+          <Field name="body" label="Body" component={renderTextarea} type="text" />
         </div>
         <button type="submit">Submit</button>
       </form>
@@ -21,9 +19,43 @@ class CommentForm extends Component {
   }
 }
 
+const renderInput = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <input {...input} placeholder={label} type={type}/>
+      {touched && (error && <span>{error}</span>)}
+    </div>
+  </div>
+)
+
+const renderTextarea = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <textarea {...input} placeholder={label} type={type}/>
+      {touched && (error && <span>{error}</span>)}
+    </div>
+  </div>
+)
 // Decorate the form component
+
+function validate(values) {
+  const errors = {};
+  if (!values.commenter || values.commenter.trim() === '') {
+    errors.commenter = 'Your name is required';
+  }
+
+  if (!values.body || values.body.trim() === '') {
+    errors.body = 'Enter body';
+  }
+
+  return errors;
+}
+
 const formData = {
-  form: 'CreateNewComment'
+  form: 'CreateNewComment',
+  validate
 }
 
 CommentForm = reduxForm(formData)(CommentForm)
