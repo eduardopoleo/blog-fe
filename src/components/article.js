@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchArticle } from '../actions';
 import { Link } from 'react-router';
 
 class Article extends Component {

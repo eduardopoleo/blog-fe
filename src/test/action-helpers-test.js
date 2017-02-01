@@ -1,9 +1,64 @@
-import { parseArticleResponse } from '../actions/action-helpers';
 import assert from 'assert';
 
+import { parseArticleResponse } from '../actions/action-helpers';
+import { articleNoAssociated, articleWithCategories, articleWithComments, articleWithCommentsAndCategories } from './fixtures.js'
+
 describe('parseArticleResponse', function() {
-  const response = {};
-  it('return 0', function() {
-    assert.equal(0, parseArticleResponse(response));
+  it('with an article with no associated', function() {
+    const articleModel = {
+      title: 'Hey there',
+      text: "how are you?",
+      categories: [],
+      comments: []
+    }
+    assert.deepEqual(articleModel, parseArticleResponse(articleNoAssociated));
+  });
+
+  it('with an article with categories', function() {
+    const articleModel = {
+      title: 'Hey there',
+      text: "how are you?",
+      categories: ["js", "dumplings"],
+      comments: []
+    }
+    assert.deepEqual(articleModel, parseArticleResponse(articleWithCategories));
+  });
+
+  it('with an article with comments', function() {
+    const articleModel = {
+      title: 'Hey there',
+      text: "how are you?",
+      categories: [],
+      comments: [
+        {
+          commenter: "jose",
+          body: "small comment"
+        },
+        {
+          commenter: "juan",
+          body: "big comment"
+        }
+      ]
+    }
+    assert.deepEqual(articleModel, parseArticleResponse(articleWithComments));
+  });
+
+  it('with an article with comments and categories', function() {
+    const articleModel = {
+      title: 'Hey there',
+      text: "how are you?",
+      categories: ["js", "dumplings"],
+      comments: [
+        {
+          commenter: "jose",
+          body: "small comment"
+        },
+        {
+          commenter: "juan",
+          body: "big comment"
+        }
+      ]
+    }
+    assert.deepEqual(articleModel, parseArticleResponse(articleWithCommentsAndCategories));
   });
 });

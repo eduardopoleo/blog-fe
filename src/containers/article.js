@@ -19,7 +19,7 @@ class ArticlePage extends Component {
         {this.categories()}
         <h1>{article.title}</h1>
         <p>{article.text}</p>
-        <br />
+        <br/>
 
         <CreateComment />
         <br />
