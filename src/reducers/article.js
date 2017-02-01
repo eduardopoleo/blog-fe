@@ -2,7 +2,9 @@ import actions from '../constans';
 
 const initialState = {
   title: "",
-  text: ""
+  text: "",
+  categories: [],
+  comments: []
 }
 
 const article = (state = initialState, action) => {

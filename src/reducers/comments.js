@@ -10,9 +10,6 @@ const initialState = []
         ...state
       ]
     }
-    case actions.SHOW_COMMENTS: {
-      return action.payload.comments
-    }
     default: {
       return state
     }

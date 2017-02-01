@@ -11,12 +11,13 @@ class ArticlePage extends Component {
   }
 
   render() {
-    const { article, comments } = this.props.dataReducer;
-    if (!comments) return null;
+    const { article } = this.props.dataReducer;
+    const comments = article.comments;
+    const categories = article.categories;
 
     return(
       <div>
-        {this.categories()}
+        { this.categories(categories) }
         <h1>{article.title}</h1>
         <p>{article.text}</p>
         <br/>
@@ -28,9 +29,9 @@ class ArticlePage extends Component {
     )
   }
 
-  categories() {
+  categories(categories) {
     return (
-      this.props.categories.map(cat => <div>{cat.name}</div>)
+      categories.map(cat => <div>{cat}</div>)
     )
   }
 }

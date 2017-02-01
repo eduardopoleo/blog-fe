@@ -2,23 +2,20 @@ import axios from 'axios';
 import actions from '../constans';
 import { reset } from 'redux-form';
 import { browserHistory } from 'react-router';
+import { parseArticleResponse } from './action-helpers';
 
 export const fetchArticle = (id) => {
   return (dispatch, getState) => {
     // Todo this is probably not necesary, but I do not think is to bad either.
     return axios.get(`http://localhost:4444/articles/${id}.json`)
     .then(response => {
-      // const parseResponse(response, id)
-      dispatch(displayArticle(article))
-
-      return commentsUrl;
+      const article = parseArticleResponse(response.data)
+      dispatch(showArticle(article))
     })
   }
 }
 
-const parseComments = comment => comment.attributes
-
-const displayArticle = (article) => {
+const showArticle = (article) => {
   return {
     type: actions.SHOW_ARTICLE,
     payload: {
