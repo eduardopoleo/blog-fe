@@ -114,12 +114,9 @@ export const createComment = (values) => {
   }
 }
 
-const addComment = (comment, articleId) => {
+const addComment = (comment) => {
   return {
     type: actions.ADD_COMMENT,
-    payload: {
-      articleId,
-      comment
-    }
+    payload: comment
   }
 }

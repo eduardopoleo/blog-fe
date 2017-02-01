@@ -15,6 +15,15 @@ const article = (state = initialState, action) => {
         ...action.payload.article
       }
     }
+    case actions.ADD_COMMENT: {
+      return {
+        ...state,
+        comments: [
+          action.payload,
+          ...state.comments,
+        ]
+      }
+    }
     default: {
       return state
     }
