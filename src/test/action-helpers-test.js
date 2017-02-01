@@ -1,7 +1,11 @@
 import assert from 'assert';
 
 import { parseArticleResponse } from '../actions/action-helpers';
-import { articleNoAssociated, articleWithCategories, articleWithComments, articleWithCommentsAndCategories } from './fixtures.js'
+import {  articleNoAssociated,
+          articleWithCategories,
+          articleWithComments,
+          articleWithCommentsAndCategories
+       } from './fixtures.js'
 
 describe('parseArticleResponse', function() {
   it('with an article with no associated', function() {
