@@ -9,7 +9,7 @@ export const fetchArticle = (id) => {
     // Todo this is probably not necesary, but I do not think is to bad either.
     return axios.get(`http://localhost:4444/articles/${id}.json`)
     .then(response => {
-      const article = parseArticleResponse(response.data)
+      const article = parseArticleResponse(response)
       dispatch(showArticle(article))
     })
   }

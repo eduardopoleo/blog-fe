@@ -1,23 +1,24 @@
 export const parseArticleResponse = response => {
-  const atributes = response.data.attributes;
+  const attributes = response.data.data.attributes;
   let categories, comments;
 
-  [categories, comments] = parseIncluded(response)
+  [categories, comments] = parseIncluded(response.data.included)
 
   return (
     {
-      title: atributes.title,
-      text: atributes.text,
+      id: response.data.data.id,
+      title: attributes.title,
+      text: attributes.text,
       categories,
       comments
     }
   )
 }
 
-const parseIncluded = (response) => {
+const parseIncluded = (included) => {
   let categories = [];
   let comments = [];
-  response.included.forEach(element => {
+  included.forEach(element => {
     switch(element.type) {
       case 'comments':
       comments.push(element.attributes)

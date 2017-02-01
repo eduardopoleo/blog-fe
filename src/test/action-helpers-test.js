@@ -10,6 +10,7 @@ import {  articleNoAssociated,
 describe('parseArticleResponse', function() {
   it('with an article with no associated', function() {
     const articleModel = {
+      id: 1,
       title: 'Hey there',
       text: "how are you?",
       categories: [],
@@ -20,6 +21,7 @@ describe('parseArticleResponse', function() {
 
   it('with an article with categories', function() {
     const articleModel = {
+      id: 1,
       title: 'Hey there',
       text: "how are you?",
       categories: ["js", "dumplings"],
@@ -30,6 +32,7 @@ describe('parseArticleResponse', function() {
 
   it('with an article with comments', function() {
     const articleModel = {
+      id: 1,
       title: 'Hey there',
       text: "how are you?",
       categories: [],
@@ -49,6 +52,7 @@ describe('parseArticleResponse', function() {
 
   it('with an article with comments and categories', function() {
     const articleModel = {
+      id: 1,
       title: 'Hey there',
       text: "how are you?",
       categories: ["js", "dumplings"],
