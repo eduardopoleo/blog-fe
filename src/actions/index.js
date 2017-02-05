@@ -120,3 +120,33 @@ const addComment = (comment) => {
     payload: comment
   }
 }
+
+export const createCategory = (values) => {
+  return (dispatch, getState) => {
+    return axios({
+      method: 'post',
+      url: 'http://localhost:4444/categories',
+      data: {
+        category: {
+          name: values.name,
+        }
+      },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      dispatch(addCategory(response.data.name));
+    }, (error) => {
+      console.log(error)
+    })
+  }
+}
+
+const addCategory = (category) => {
+  return {
+    type: actions.ADD_CATEGORY,
+    payload: category
+  }
+}

@@ -12,7 +12,9 @@ class Navbar extends Component {
           {' '}
           <Link to="/articles">Articles</Link>
           {' '}
-          <Link to="/new-article">Create</Link>
+          <Link to="/new-article">New Article</Link>
+          {' '}
+          <Link to="/new-category">New Category</Link>
         </header>
         <div style={{ marginTop: '1.5em' }}>{this.props.children}</div>
       </div>

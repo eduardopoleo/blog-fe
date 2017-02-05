@@ -12,6 +12,7 @@ import Navbar from '../components/navbar';
 import Articles from './articles';
 import Article from './article';
 import CreateArticle from './create-article';
+import CreateCategory from './create-category';
 import Home from '../components/home';
 
 const reducer = combineReducers({
@@ -37,6 +38,7 @@ export default class App extends Component {
               <Route path='/articles' component={Articles} />
               <Route path='/articles/:id' component={Article} />
               <Route path='/new-article' component={CreateArticle} />
+              <Route path='/new-category' component={CreateCategory} />
             </Route>
           </Router>
         </Provider>
