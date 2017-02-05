@@ -8,6 +8,7 @@ class CategoryForm extends Component {
     return (
       <form onSubmit={this.props.handleSubmit(this.props.createCategory)}>
         <div>
+          <label htmlFor="title">Name</label>
           <Field name="name" label="name" component='input' type="text"/>
         </div>
         <button type="submit">Submit</button>

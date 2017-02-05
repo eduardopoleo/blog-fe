@@ -137,6 +137,7 @@ export const createCategory = (values) => {
       }
     })
     .then((response) => {
+      dispatch(reset('CategoryForm'))
       dispatch(addCategory(response.data.name));
     }, (error) => {
       console.log(error)
@@ -147,6 +148,26 @@ export const createCategory = (values) => {
 const addCategory = (category) => {
   return {
     type: actions.ADD_CATEGORY,
-    payload: category
+    payload: { category }
+  }
+}
+
+export const fetchCategories = () => {
+  return dispatch => {
+    return axios.get('http://localhost:4444/categories.json')
+    .then((response) => {
+      dispatch(
+        displayCategories(response.data.data.map(cat => cat.attributes.name))
+      )
+    })
+  }
+}
+
+const displayCategories = (categories) => {
+  return {
+    type: actions.SHOW_CATEGORIES,
+    payload: {
+      categories
+    }
   }
 }
