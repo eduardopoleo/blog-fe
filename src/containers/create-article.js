@@ -1,33 +1,39 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { createArticle } from '../actions';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+import ArticleForm from './article-form';
+import CategoryCheckbox from '../components/category-checkbox';
+import { fetchCategories, toggleCategoryState, resetSelectedCategories } from '../actions';
 
-class ArticleForm extends Component {
+class CreateArticle extends Component {
+  componentWillMount() {
+    if (!this.props.dataReducer.categories.length === 0) return null
+
+    this.props.fetchCategories()
+    this.props.resetSelectedCategories()
+  }
+
   render() {
+    console.log(this.props.dataReducer.selectedCategories)
+
     return (
-      <form onSubmit={this.props.handleSubmit(this.props.createArticle)}>
-        <div>
-          <label htmlFor="title">Title</label>
-          <Field name="title" component="input" type="text"/>
-        </div>
-        <div>
-          <label htmlFor="text">Text</label>
-          <Field name="text" component="textarea" type="text" />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      <div>
+        { this.categoriesCheckboxes() }
+      <br></br>
+        <ArticleForm />
+      </div>
     );
+  }
+
+  categoriesCheckboxes() {
+    return (
+      this.props.dataReducer.categories.map(
+        cat => <CategoryCheckbox
+          name={cat.name}
+          id={cat.id}
+          toggleCategoryState = {this.props.toggleCategoryState}/>
+      )
+    )
   }
 }
 
-// Decorate the form component
-const formData = {
-  form: 'PostNewArticle'
-}
-
-ArticleForm = reduxForm(formData)(ArticleForm)
-ArticleForm = connect(null, { createArticle })(ArticleForm)
-
-export default ArticleForm;
+export default connect(state => state, { fetchCategories, toggleCategoryState, resetSelectedCategories })(CreateArticle);

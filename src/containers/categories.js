@@ -14,7 +14,7 @@ class Categories extends Component {
 
     return(
       <div>
-        { categories.map(category => <div>{category}</div>) }
+        { categories.map(cat => <div>{cat.name}</div>) }
         <br></br>
 
         <CreateCategory />

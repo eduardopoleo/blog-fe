@@ -61,7 +61,8 @@ export const createArticle = (values) => {
       data: {
         article: {
           title: values.title,
-          text: values.text
+          text: values.text,
+          category_ids: getState().dataReducer.selectedCategories
         }
       },
       headers: {
@@ -155,9 +156,16 @@ const addCategory = (category) => {
 export const fetchCategories = () => {
   return dispatch => {
     return axios.get('http://localhost:4444/categories.json')
-    .then((response) => {
+    .then(response => {
+      console.log(response)
       dispatch(
-        displayCategories(response.data.data.map(cat => cat.attributes.name))
+        displayCategories(
+          response.data.data.map(cat => {
+            return(
+              { name: cat.attributes.name, id: cat.id }
+            )
+          })
+        )
       )
     })
   }
@@ -169,5 +177,20 @@ const displayCategories = (categories) => {
     payload: {
       categories
     }
+  }
+}
+
+export const toggleCategoryState = (id) => {
+  return {
+    type: actions.TOGGLE_CATEGORY,
+    payload: {
+      id
+    }
+  }
+}
+
+export const resetSelectedCategories = () => {
+  return {
+    type: actions.RESET_SELECTED_CATEGORIES
   }
 }
